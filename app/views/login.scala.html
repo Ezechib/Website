@@ -1,0 +1,23 @@
+@(form: Form[LoginDetails])(implicit messagesProvider: MessagesProvider)
+
+@main("Login") {
+    <body id ="body">
+        <center>
+            <div>
+            @helper.form(routes.LoginController.loginSubmit()){
+                @helper.inputText(form("username"), '_label -> "Login", '_showConstraints -> false)
+                @helper.inputPassword(form("password"), '_label -> "Password", '_showConstraints -> false)
+                <button type="submit" class="btn">Log In</button>
+            }
+            </div>
+        </center>
+
+        <script>
+            document.querySelector('.btn').addEventListener("click", function (){
+                document.body.style.backgroundImage='none'
+            } )
+        </script>
+    </body>
+
+
+}

@@ -1,0 +1,47 @@
+@(message: String)
+
+@main("Welcome to Play") {
+    <html>
+
+        <head>
+            <title>
+                How to create an image element
+                dynamically using JavaScript ?
+            </title>
+        </head>
+
+        <body id = "body2" style = "text-align:center;">
+
+            <h1 style = "color:red;" >
+                Blake Dating Experience
+            </h1>
+
+            <p id = "GFG_UP" style =
+            "font-size: 15px; font-weight: bold;">
+            </p>
+
+            <button onclick = "GFG_Fun()">
+                click here
+            </button>
+
+            <p id = "GFG_DOWN" style =
+            "color:orangered; font-size: 20px; font-weight: bold;">
+            </p>
+
+            <script>
+                    var up = document.getElementById('GFG_UP');
+                    up.innerHTML = "Click on the button to see the prize";
+                    var down = document.getElementById('GFG_DOWN');
+
+                    function GFG_Fun() {
+                        var img = new Image();
+                        img.src =
+                                'https://s.yimg.com/ny/api/res/1.2/XL8ajLqMY2rnuYJkGWgvUg--~A/YXBwaWQ9aGlnaGxhbmRlcjtzbT0xO3c9ODAw/https://media.zenfs.com/en-US/theblast_73/fcf2c3c0e7a18eb91e794730d2663026';
+                        document.getElementById('body2').appendChild(img);
+                        down.innerHTML = "Beautiful woman";
+                    }
+            </script>
+        </body>
+
+    </html>
+}
