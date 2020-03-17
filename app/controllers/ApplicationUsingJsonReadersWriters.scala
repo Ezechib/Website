@@ -23,7 +23,7 @@ class ApplicationUsingJsonReadersWriters @Inject()(
 
   implicit def ec: ExecutionContext = components.executionContext
 
-  def collection: Future[JSONCollection] = database.map(_.collection[JSONCollection]("persons"))
+  def collection: Future[JSONCollection] = database.map(_.collection[JSONCollection]("woman"))
 
   def create: Action[AnyContent] = Action.async {
     val user = User(29, "John", "Smith", List(Feed("Slashdot news", "http://slashdot.org/slashdot.rdf")))
