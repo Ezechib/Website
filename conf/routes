@@ -10,3 +10,5 @@ POST        /createFromJson              controllers.ApplicationUsingJsonReaders
 GET         /findByName/:lastName        controllers.ApplicationUsingJsonReadersWriters.findByName(lastName: String)
 
 GET         /assets/*file                controllers.Assets.at(path="/public", file)
+GET         /findAll                     controllers.ApplicationUsingJsonReadersWriters.findAll
+DELETE      /deleteAll                   controllers.ApplicationUsingJsonReadersWriters.delete

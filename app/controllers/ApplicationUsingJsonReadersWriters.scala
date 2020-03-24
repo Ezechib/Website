@@ -24,6 +24,7 @@ class ApplicationUsingJsonReadersWriters @Inject()(
   implicit def ec: ExecutionContext = components.executionContext
 
   def collection: Future[JSONCollection] = database.map(_.collection[JSONCollection]("woman"))
+  def userCollection: Future[JSONCollection] = database.map(_.collection[JSONCollection]("user"))
 
   def create: Action[AnyContent] = Action.async {
     val user = User(29, "John", "Smith", List(Feed("Slashdot news", "http://slashdot.org/slashdot.rdf")))
@@ -57,6 +58,26 @@ class ApplicationUsingJsonReadersWriters @Inject()(
       Ok(persons.toString)
     }
   }
+  def findAll() = Action.async {
+    val cursor: Future[Cursor[User]] = collection.map {
+      _.find(Json.obj()).cursor[User]()  }
+    val futureUserList: Future[List[User]] =
+      cursor.flatMap(
+        _.collect[List](
+          -1,
+          Cursor.FailOnError[List[User]]()      )
+      )
+    futureUserList.map { persons =>
+      Ok(persons.toString)
+    }
+  }
+  def delete: Action[JsValue] = Action.async(parse.json){ request =>
+    request.body.validate[User].map { user =>
+      collection.flatMap(c => c.remove(user)).map{_ => Ok("removed")
+      }
+    }.getOrElse(Future.successful(BadRequest("invalid Json")))
+  }
+
 
 
 
